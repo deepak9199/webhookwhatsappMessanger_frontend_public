@@ -1,0 +1,510 @@
+<div class="main-wrapper">
+
+  <div class="content main_content">
+
+    <div class="sidebar-menu">
+      <div class="logo-col">
+        <a href="index.html"><img src="assets/img/logo.png" alt="Logo"></a>
+      </div>
+      <div class="menus-col">
+        <div class="chat-menus">
+          <ul>
+            <li>
+              <a class="chat-unread active" data-bs-toggle="tooltip" data-bs-placement="right" title
+                data-bs-original-title="Chat">
+                <i class="bx bx-message-square-dots"></i>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+        <div class="bottom-menus">
+          <ul>
+            <li>
+              <a href="#" id="dark-mode-toggle" class="dark-mode-toggle active">
+                <i class="bx bx-moon"></i>
+              </a>
+              <a href="#" id="light-mode-toggle" class="dark-mode-toggle">
+                <i class="bx bx-sun"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="sidebar-group left-sidebar chat_sidebar">
+
+      <div id="chats" class="left-sidebar-wrap sidebar active slimscroll">
+        <div class="slimscroll">
+
+          <div class="left-chat-title all-chats d-flex justify-content-between align-items-center">
+            <div class="select-group-chat">
+              <div class="dropdown">
+                <a href="javascript:;" class="dropdown-toggle" data-bs-toggle="dropdown">
+                  All Chats<i class="bx bx-chevron-down"></i>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="chat.html">All Chat</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="add-section">
+              <ul>
+                <li><a href="javascript:;" class="user-chat-search-btn"><i class="bx bx-search"></i></a></li>
+              </ul>
+
+              <div class="user-chat-search">
+                <form>
+                  <span class="form-control-feedback"><i class="bx bx-search"></i></span>
+                  <input type="text" name="chat-search" placeholder="Search" class="form-control">
+                  <div class="user-close-btn-chat"><span class="material-icons">close</span></div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="sidebar-body chat-body" id="chatsidebar">
+
+            <div class="d-flex justify-content-between align-items-center ps-0 pe-0">
+              <div class="fav-title pin-chat">
+                <h6><i class="bx bx-message-square-dots me-1"></i>Recent Chat</h6>
+              </div>
+            </div>
+
+            <ul class="user-list">
+              <li *ngFor="let customerobj of phone_list; let i = index" (click)="selectCustomer(i,customerobj.phoneno)"
+                class="user-list-item chat-user-list">
+                <a href="javascript:;">
+                  <div class="avatar avatar-online">
+                    <img src="assets/img/avatar/avatar-1.jpg" class="rounded-circle" alt="image">
+                  </div>
+                  <div class="users-list-body">
+                    <div>
+                      <h5>{{ replacePercentWithSpace(customerobj.cname) }}</h5>
+                      <p>{{ customerobj.phoneno }}</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="chat chat-messages" id="middle">
+      <div>
+        <div class="chat-header">
+          <div class="user-details">
+            <div class="d-lg-none">
+              <ul class="list-inline mt-2 me-2">
+                <li class="list-inline-item">
+                  <a class="text-muted px-0 left_sides" href="#" data-chat="open">
+                    <i class="fas fa-arrow-left"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <figure class="avatar ms-1">
+              <img src="assets/img/avatar/avatar-2.jpg" class="rounded-circle" alt="image">
+            </figure>
+            <div class="mt-1">
+              <h5> {{replacePercentWithSpace(phone_list_msg[msg_index].cname)}} </h5>
+              <small class="last-seen">
+                {{phone_list_msg[msg_index].phoneno}}
+              </small>
+            </div>
+          </div>
+          <div class="chat-options ">
+            <ul class="list-inline">
+              <li class="list-inline-item dream_profile_menu">
+                <a href="javascript:void(0)" class="btn btn-outline-light not-chat-user" data-bs-toggle="tooltip"
+                  data-bs-placement="bottom" title="Contact Info">
+                  <i class="bx bx-info-circle"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="chat-search">
+            <form>
+              <span class="form-control-feedback"><i class="bx bx-search"></i></span>
+              <input type="text" name="chat-search" placeholder="Search Chats" class="form-control">
+              <div class="close-btn-chat"><span class="material-icons">close</span></div>
+            </form>
+          </div>
+
+        </div>
+        <div class="chat-body chat-page-group slimscroll">
+          <div class="messages">
+            <div *ngFor="let msg of currentChatMessages" style="width: 100%;">
+              <div *ngIf="msg.type === 'incoming'" class="chats">
+                <div class="chat-avatar">
+                  <img src="assets/img/avatar/avatar-2.jpg" class="rounded-circle dreams_chat" alt="image">
+                </div>
+                <div class="chat-content">
+                  <div class="chat-profile-name">
+                    <h6><span>{{ msg.time }}</span><span class="check-star msg-star d-none"><i
+                          class="bx bxs-star"></i></span></h6>
+                  </div>
+                  <div class="message-content">
+                    {{ replacePercentWithSpace(msg.text) }}
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="msg.type === 'outgoing'" class="chats chats-right">
+                <div class="chat-content">
+                  <div class="chat-profile-name text-end">
+                    <h6><i class="bx bx-check-double me-1 inactive-check"></i><span>{{ msg.time }}
+                      </span><span class="check-star msg-star-one d-none"><i class="bx bxs-star"></i></span></h6>
+                  </div>
+                  <div class="message-content ">
+                    {{ msg.text }}
+                  </div>
+                </div>
+                <div class="chat-avatar">
+                  <img src="assets/img/avatar/avatar-10.jpg" class="rounded-circle dreams_chat" alt="image">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chat-footer">
+        <form>
+          <div class="replay-forms">
+            <input [(ngModel)]="messageData" name="messageData" id="messageData" type="text" type="text"
+              class="form-control chat_form" placeholder="Type your message here...">
+          </div>
+          <div class="form-buttons">
+            <button (click)="sendmessage(messageData,msg_index)" class="btn send-btn" type="submit">
+              <i class="bx bx-paper-plane"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <div class="right-sidebar right_sidebar_profile right-side-contact hide-right-sidebar" id="middle1">
+      <div class="right-sidebar-wrap active">
+        <div class="slimscroll">
+          <div class="left-chat-title d-flex justify-content-between align-items-center border-bottom-0">
+            <div class="fav-title mb-0">
+              <h6>Contact Info</h6>
+            </div>
+            <div class="contact-close_call text-end">
+              <a href="#" class="close_profile close_profile4">
+                <span class="material-icons">close</span>
+              </a>
+            </div>
+          </div>
+          <div class="sidebar-body">
+            <div class="mt-0 right_sidebar_logo">
+              <div class="text-center right-sidebar-profile">
+                <figure class="avatar avatar-xl mb-3">
+                  <img src="assets/img/avatar/avatar-2.jpg" class="rounded-circle" alt="image">
+                </figure>
+                <h5 class="profile-name">Mark Villiams</h5>
+                <div class="last-seen-profile">
+                  <span>last seen at 07:15 PM</span>
+                </div>
+                <div class="chat-options chat-option-profile">
+                  <ul class="list-inline">
+                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Voice Call">
+                      <a href="audio-call.html" class="btn btn-outline-light " data-bs-toggle="modal"
+                        data-bs-target="#voice_call">
+                        <i class="bx bx-phone"></i>
+                      </a>
+                    </li>
+                    <li class="list-inline-item " data-bs-toggle="tooltip" data-bs-placement="bottom"
+                      title="Video Call">
+                      <a href="video-call.html" class="btn btn-outline-light profile-open" data-bs-toggle="modal"
+                        data-bs-target="#voice_call">
+                        <i class="bx bx-video"></i>
+                      </a>
+                    </li>
+                    <li class="list-inline-item">
+                      <a href="chat.html" class="btn btn-outline-light" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" title="Chat">
+                        <i class="bx bx-message-square-dots"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="chat-member-details">
+                <div class="member-details">
+                  <ul>
+                    <li>
+                      <h5>Info</h5>
+                    </li>
+                    <li>
+                      <h6>Bio</h6>
+                      <span>Hello, I am using DreamsChat</span>
+                    </li>
+                    <li>
+                      <h6>Phone</h6>
+                      <span>555-555-21541</span>
+                    </li>
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="right-sidebar-head share-media">
+            <div class="share-media-blk">
+              <h5>Shared Media</h5>
+              <a href="javascript:;">View All</a>
+            </div>
+            <div class="about-media-tabs">
+              <nav>
+                <div class="nav nav-tabs " id="nav-tab">
+                  <a class="nav-item nav-link active" id="nav-home-tab" data-bs-toggle="tab" href="#info">Photos</a>
+                  <a class="nav-item nav-link" id="nav-profile-tab1" data-bs-toggle="tab"
+                    href="#Participants">Videos</a>
+                  <a class="nav-item nav-link" id="nav-profile-tab2" data-bs-toggle="tab" href="#media">File</a>
+                  <a class="nav-item nav-link" id="nav-profile-tab3" data-bs-toggle="tab" href="#link">Link</a>
+                </div>
+              </nav>
+              <div class="tab-content pt-0" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="info">
+                  <ul class="nav share-media-img mb-0">
+                    <li>
+                      <a href="assets/img/media/media-big-01.jpg" data-fancybox="gallery" class="fancybox">
+                        <img src="assets/img/media/media-01.jpg" alt>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="assets/img/media/media-big-02.jpg" data-fancybox="gallery" class="fancybox">
+                        <img src="assets/img/media/media-02.jpg" alt>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="assets/img/media/media-big-03.jpg" data-fancybox="gallery" class="fancybox">
+                        <img src="assets/img/media/media-03.jpg" alt>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="assets/img/media/media-big-04.jpg" data-fancybox="gallery" class="fancybox">
+                        <img src="assets/img/media/media-04.jpg" alt>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="assets/img/media/media-05.jpg" data-fancybox="gallery" class="fancybox">
+                        <img src="assets/img/media/media-05.jpg" alt>
+                      </a>
+                    </li>
+                    <li class="blur-media">
+                      <a href="assets/img/media/media-02.jpg" data-fancybox="gallery" class="fancybox">
+                        <img src="assets/img/media/media-02.jpg" alt>
+                      </a>
+                      <span>+10</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="tab-pane fade" id="Participants">
+                  <ul class="nav share-media-img mb-0">
+                    <li>
+                      <a href="https://www.youtube.com/embed/Mj9WJJNp5wA" data-fancybox class="fancybox">
+                        <img src="assets/img/media/media-01.jpg" alt="img">
+                        <span><i class="bx bx-play-circle"></i></span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://www.youtube.com/embed/Mj9WJJNp5wA" data-fancybox class="fancybox">
+                        <img src="assets/img/media/media-02.jpg" alt="img">
+                        <span><i class="bx bx-play-circle"></i></span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://www.youtube.com/embed/Mj9WJJNp5wA" data-fancybox class="fancybox">
+                        <img src="assets/img/media/media-03.jpg" alt="img">
+                        <span><i class="bx bx-play-circle"></i></span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://www.youtube.com/embed/Mj9WJJNp5wA" data-fancybox class="fancybox">
+                        <img src="assets/img/media/media-04.jpg" alt="img">
+                        <span><i class="bx bx-play-circle"></i></span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://www.youtube.com/embed/Mj9WJJNp5wA" data-fancybox class="fancybox">
+                        <img src="assets/img/media/media-05.jpg" alt="img">
+                        <span><i class="bx bx-play-circle"></i></span>
+                      </a>
+                    </li>
+                    <li class="blur-media">
+                      <a href="https://www.youtube.com/embed/Mj9WJJNp5wA" data-fancybox class="fancybox">
+                        <img src="assets/img/media/media-03.jpg" alt="img">
+                      </a>
+                      <span>+10</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="tab-pane fade" id="media">
+                  <div class="media-file">
+                    <div class="media-doc-blk">
+                      <span><i class="bx bxs-file-doc"></i></span>
+                      <div class="document-detail">
+                        <h6>Landing_page_V1.doc</h6>
+                        <ul>
+                          <li>12 Mar 2023</li>
+                          <li>246.3 KB</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="media-download">
+                      <a href="javascript:;"><i class="bx bx-download"></i></a>
+                    </div>
+                  </div>
+                  <div class="media-file">
+                    <div class="media-doc-blk">
+                      <span><i class="bx bxs-file-pdf"></i></span>
+                      <div class="document-detail">
+                        <h6>Design Guideless.pdf</h6>
+                        <ul>
+                          <li>12 Mar 2023</li>
+                          <li>246.3 KB</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="media-download">
+                      <a href="javascript:;"><i class="bx bx-download"></i></a>
+                    </div>
+                  </div>
+                  <div class="media-file">
+                    <div class="media-doc-blk">
+                      <span><i class="bx bxs-file"></i></span>
+                      <div class="document-detail">
+                        <h6>sample site.txt</h6>
+                        <ul>
+                          <li>12 Mar 2023</li>
+                          <li>246.3 KB</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="media-download">
+                      <a href="javascript:;"><i class="bx bx-download"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="link">
+                  <div class="media-link-grp">
+                    <div class="link-img">
+                      <a href="javascript:;"><img src="assets/img/media-link-01.jpg" alt="Img"></a>
+                    </div>
+                    <div class="media-link-detail">
+                      <h6><a href="javascript:;">Digital Marketing Guide</a></h6>
+                      <span><a href="javascript:;">https://elements.envato.com/all-items/blog</a></span>
+                    </div>
+                  </div>
+                  <div class="media-link-grp mb-0">
+                    <div class="link-img">
+                      <a href="javascript:;"><img src="assets/img/media-link-02.jpg" alt="Img"></a>
+                    </div>
+                    <div class="media-link-detail">
+                      <h6><a href="javascript:;">Blog Post</a></h6>
+                      <span><a href="javascript:;">https://elements.envato.com/blog-post-TXQ5FB8</a></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="group-comman-theme">
+            <h6>2 Group in Common</h6>
+            <ul>
+              <li>
+                <div class="avatar">
+                  <img src="assets/img/avatar/avatar-14.png" class="rounded-circle" alt="image">
+                </div>
+                <div class="theme-content">
+                  <h6>Themeforest Group</h6>
+                  <p>Mark Villiams, Elizabeth, Michael....</p>
+                </div>
+              </li>
+              <li>
+                <div class="avatar">
+                  <img src="assets/img/avatar/avatar-15.png" class="rounded-circle" alt="image">
+                </div>
+                <div class="theme-content">
+                  <h6>Graphic Designers</h6>
+                  <p>Mark Villiams, Elizabeth, Michael....</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chat-message-grp">
+            <ul>
+              <li>
+                <a href="javascript:;" class="star-message-left">
+                  <div class="stared-group">
+                    <span class="star-message"> <i class="bx bxs-star"></i></span>
+                    <h6>Starred Messages</h6>
+                  </div>
+                  <div class="count-group">
+                    <span>10</span>
+                    <i class="feather-chevron-right"></i>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#mute-notification">
+                  <div class="stared-group">
+                    <span class="mute-message"> <i class="bx bxs-microphone-off"></i></span>
+                    <h6>Mute Notifications</h6>
+                  </div>
+                  <div class="count-group">
+                    <i class="feather-chevron-right"></i>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#block-user">
+                  <div class="stared-group">
+                    <span class="block-message"> <i class="bx bx-block"></i></span>
+                    <h6>Block User</h6>
+                  </div>
+                  <div class="count-group">
+                    <i class="feather-chevron-right"></i>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#report-user">
+                  <div class="stared-group">
+                    <span class="report-message"> <i class="bx bx-dislike"></i></span>
+                    <h6>Report User</h6>
+                  </div>
+                  <div class="count-group">
+                    <i class="feather-chevron-right"></i>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#delete-user">
+                  <div class="stared-group">
+                    <span class="delete-message"> <i class="bx bx-trash"></i></span>
+                    <h6>Delete Chat</h6>
+                  </div>
+                  <div class="count-group">
+                    <i class="feather-chevron-right"></i>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>

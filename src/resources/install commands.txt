@@ -1,0 +1,5 @@
+npm install firebase @angular/fire --save
+npm install ngx-toastr --save
+"node_modules/ngx-toastr/toastr.css",
+ npm install husky --save-dev 
+ npm install admin-lte@^3.0 --save

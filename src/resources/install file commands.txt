@@ -1,0 +1,79 @@
+
+//install
+npm install xlsx
+npm install file-saver
+ng add @angular/material
+npm i ngx-moment
+npm install ngx-toastr --save
+npm install @angular/animations --save
+npm install admin-lte@^3.0 --save
+npm install ngx-print
+npm i html2canvas
+npm i jspdf
+npm install @angular/flex-layout@15.0.0-beta.42
+npm i -s @angular/flex-layout @angular/cdk
+
+// toster error
+ng update @angular/core @angular/cli
+
+//error  
+npm config set legacy-peer-deps true
+npm i
+
+
+// copy 
+b.	Put this code in angular.json file present in project
+i.	Codes are :
+.....
+    "styles": [
+"node_modules/ngx-toastr/toastr.css",
+      "src/styles.css"
+    ],
+
+a.	Put this code in index.html file present in project
+i.	Codes are :
+<body class="hold-transition sidebar-mini layout-fixed mat-typography">
+<app-root></app-root>
+
+
+b.	Put this code in angular.josn file present in project
+i.	Code are :
+………………..
+"styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "src/styles.css",
+              "node_modules/admin-lte/plugins/fontawesome-free/css/all.min.css",
+              "node_modules/admin-lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
+              "node_modules/admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
+              "node_modules/admin-lte/plugins/jqvmap/jqvmap.min.css",
+              "node_modules/admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
+              "node_modules/admin-lte/plugins/daterangepicker/daterangepicker.css",
+              "node_modules/admin-lte/plugins/summernote/summernote-bs4.css",
+              "node_modules/admin-lte/dist/css/adminlte.min.css"
+            ],
+            "scripts": [
+              "node_modules/admin-lte/plugins/jquery/jquery.min.js",
+              "node_modules/admin-lte/plugins/jquery-ui/jquery-ui.min.js",
+              "node_modules/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js",
+              "node_modules/admin-lte/plugins/chart.js/Chart.min.js",
+              "node_modules/admin-lte/plugins/sparklines/sparkline.js",
+              "node_modules/admin-lte/plugins/jqvmap/jquery.vmap.min.js",
+              "node_modules/admin-lte/plugins/jqvmap/maps/jquery.vmap.usa.js",
+              "node_modules/admin-lte/plugins/jquery-knob/jquery.knob.min.js",
+              "node_modules/admin-lte/plugins/moment/moment.min.js",
+              "node_modules/admin-lte/plugins/daterangepicker/daterangepicker.js",
+              "node_modules/admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
+              "node_modules/admin-lte/plugins/summernote/summernote-bs4.min.js",
+              "node_modules/admin-lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js",
+              "node_modules/admin-lte/dist/js/adminlte.js",
+              "node_modules/admin-lte/dist/js/pages/dashboard.js",
+              "node_modules/admin-lte/dist/js/demo.js"
+            ]
+
+
+a.	Put this code in tsconfig.json file present in project
+i.	Codes are:
+"allowSyntheticDefaultImports": true,
+    "strictPropertyInitialization": false,
+    "strictNullChecks": false,
+

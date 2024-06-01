@@ -1,0 +1,4 @@
+1.change port to comman port
+2.change base Url environment
+3.change index.html <base href='/url name/'>
+4.ng build --base-href /glownglitter/
